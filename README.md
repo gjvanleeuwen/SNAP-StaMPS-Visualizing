@@ -344,29 +344,88 @@ If you have chosen to process in multiple patches from mt_prep_snap the patches 
 Phase unwrapping creates the displacement values for the final results based on a stochastic process over all interferograms.
 Step 6 is really important and prone to error so reprocessing this step multiple times is necessary to get good results.
 The important parameters for step 6 are:
+
 ``` unwrap_prefilter_flag``` The recommendation for this parameter is to keep it on 'y' because this will extract the errors calculated at step 7 and adds them in after unwrapping to improve the accuracy of the unwrapping. If you want to process 1 run without the pre_filter you can use ```scla_reset``` to clear the values from step 7.
+
 ```unwrap_grid_size``` This parameter determines to what grid the PS pixels will be resampled for the unwrapping. Higher values will reduce noise from unwrapping but also can undersample your deformation, use this parameter for noise reduction but with caution.
+
 ```unwrap_gold_n_win``` , ```unwrap_time_win ``` and ``` unwrap_gold_alpha``` these parameters control the Goldstein filter that is used on the grid before unwrapping takes place and reduces noise on the fringes. Highering the alpha value will generally set the filter to filter more and can therefore undersample your deformation, the window and time size of the filter should be played with to obtain a good result. ```unwrap_gold_n_win``` can cause problems when not enough pixels fall inside of the window, it has to be highered than.
+
 ```drop_ifg_index``` This parameter makes sure the interferograms listed (by number as shown in ```ps_info```) are not used in the processing, if a interferogram is added the processing has to be rerun from step 3. Use this parameter if after multiple times this interferogram can still not be reliabely unwrapped.
 
-- step 7
+- step 7 Estimate spatially-correlated look angle error
 
-- step 8
+Spatially-uncorrelated look angle (SULA) error was calculated in Step 3 and removed in Step 5.  InStep 7,  spatially-correlated look angle (SCLA) error is calculated which is due almost exclusivelyto  spatially-correlated  DEM  error  (this  includes  error  in  the  DEM  itself,  and  incorrect  mapping  ofthe DEM into radar co-ordinates).   Master atmosphere and orbit error (AOE) phase is estimated simultaneously.
+
+The errors calculated in step 7 are importtant to improve the unwrapping results so the final result reaches its optimum state.
+
+The most important parameters for step 7 are ```scla_drop_index``` and ```scla_deramp```. If a result is not reliabely unwrapped and you do not want to impact it the result of step 7 you can add the interferogram (number in ps_info) to the ```scla_drop_index``` and step 7 will skip this interferogram when calculating. Using ```scla_deramp``` may improve your results when high phase ramps are distorting your results, by setting parameter to 'y' it will calculate an extra error to be removed.
+
+
+- step 8 Atmospheric calculation using StaMPS
+
+step 8 filters the results specifically for atmospheric disturbance, play with the parameters ```scn_wavelength``` and ```scn_time_win``` to see what works for your AOI.
 
 ### how to process in StaMPS
 
-run steps 1-6
-check ps_plot ('u')
-add bad ifgs to scla_drop_index
-run step 7
-check ps_plot('u-dm') is generally smoother
-rerun step 6
-check ps_plot(ú')
+- run steps 1-6
+- check ps_plot ('u')
+- add bad ifgs to scla_drop_index
+- run step 7
+- check ps_plot('u-dm') is generally smoother
+- rerun step 6
+- check ps_plot('u') 
+- remove ifgs that have improved in unwrapping result from scla_index and rerun step 7
+- rerun step 6 and check again.
 
+keep doing this process until results are satisfying and command:
+```ps_plot('v-do'. 'ts')```
+to check if the total velocities are okay, if result is not satisfying try:
 
+- rerun from step 5 with a higher ``` merge_resample_size``` 
+- rerun from step 4 with changes to the ``` weed_standard_dev```  parameter
+- rerun from step 2 with bad ifgs added to ``` drop_ifg_index```  and possible changes to parameters step 2 and 3
 
+set your reference location for plotting using: 
+``` 
+setparm('ref_centre_lonlat' , [lon lat])
+setparm('ref_radius', radius_m)
+``` 
 
+if all results are satisfying make a kml file with all data for visualization:
+``` 
+% save PS velocity estimation to a mat file
+>> ps_plot('v-d', -1)
+% load matfile
+>> load ps_plot_v-d
+% save ps.kml (generated from ph_disp for every 10 points with an opacity of 0.4
+>> ps_gescatter('ps.kml',ph_disp,10,0.4)
+``` 
 
+or make a csv file with all data vor visualizations:
+``` 
+ps_plot('v-do', 'ts');
+% after the plot has appeared magically, set radius and location by clicking into the plot
+load parms.mat;
+ps_plot('v-do', -1);
+load ps_plot_v-do.mat;
+lon2_str = cellstr(num2str(lon2));
+lat2_str = cellstr(num2str(lat2));
+lonlat2_str = strcat(lon2_str, lat2_str);
+
+lonlat_str = strcat(cellstr(num2str(lonlat(:,1))), cellstr(num2str(lonlat(:,2))));
+ind = ismember(lonlat_str, lonlat2_str);
+
+disp = ph_disp(ind);
+disp_ts = ph_mm(ind,:);
+export_res = [lon2 lat2 disp disp_ts];
+
+metarow = [ref_centre_lonlat NaN transpose(day)-1];
+k = 0;
+export_res = [export_res(1:k,:); metarow; export_res(k+1:end,:)];
+export_res = table(export_res);
+writetable(export_res,'stamps_tsexport.csv')
+``` 
 
 # post-StaMPS processing
 
