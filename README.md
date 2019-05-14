@@ -382,6 +382,7 @@ keep doing this process until results are satisfying and command:
 ```ps_plot('v-do'. 'ts')```
 to check if the total velocities are okay, if result is not satisfying try:
 
+- rerun from step 6 with more goldstein filtering
 - rerun from step 5 with a higher ``` merge_resample_size``` 
 - rerun from step 4 with changes to the ``` weed_standard_dev```  parameter
 - rerun from step 2 with bad ifgs added to ``` drop_ifg_index```  and possible changes to parameters step 2 and 3
