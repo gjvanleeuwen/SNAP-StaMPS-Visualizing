@@ -225,20 +225,74 @@ Another option could be changing the estimate coherence from False to True like 
 ```
 <includeCoherence>True</includeCoherence>
 ```
+Or oversampling the signal by changing the coregistration parameters like this:
+```
+<cohWinAz>5</cohWinAz>
 
+<cohWinRg>20</cohWinRg>
+```
 ## StaMPS processing
 
-if you havent yet, fill in the config.bash script with below template......
-then open a terminal and enter:
+StaMPS is a software package developed for linux bash and the linux matlab environment, in order to complete all the steps we need todo both the preperation step in the terminal as the processing steps in matlab.
 
-source config.bash..... ## this will add all required commands to your PATH variable and make the scripts executable
-cd location_of_insar_masterdate_folder ## example: cd E:\project\INSAR_20160803\
-mt_prep_snap MASTER_DATE MASTERDATE_FOLDER_LOCATION DA PATCH_azimuth PATCh_..... OVERLAP_... OVERLAP_..... ## example: 
+# pre-matlab processing
+To start matlab processing we first have to setup an environment using the config.bash file that is delivered with the STaMPS installation.
+Navigate to your StaMPS folder and open the config.bash file in a text editor, file is located here:
+```
+/home/username/your_proj_folder/StaMPS-4.1-beta/StaMPS_CONFIG.bash
+```
+Change all paths in this file to the correct paths to the software bin, if you can't find a path use the whereis command to locate the install directories like this:
+```
+whereis SNAPHU Triangle
+```
+change the paths in the file like this:
+```
+# set environment variables:
+export STAMPS="/home/username/StaMPS"
+export SNAP2STAMPS="/home/username/snap2stamps"
+...
+#if triangle and snaphu are not installed through the repositories (i.e. compiled locally):
+export TRIANGLE_BIN="/home/username/software/triangle/bin"
+export SNAPHU_BIN="/home/username/software/snaphu/bin"
+...
+export MATLABPATH=$STAMPS/matlab:`echo $MATLABPATH`
+...
+# use points not commas for decimals, and give dates in US english
+export LC_NUMERIC="en_US.UTF-8"
+export LC_TIME="en_US.UTF-8"
+...
+export PATH=${PATH}:$STAMPS/bin:$MATLABPATH:$SNAP2STAMPS/bin
+```
+and then upon opening the terminal add all paths to your ENV by sourcing the config file:
+```
+source /home/username/your_proj_folder/StaMPS-4.1-beta/StaMPS_CONFIG.bash
+```
 
-when mt_prep_snap is done command:
+upon having setup the environment we can start processing, remember to source the config.bash file everytime a new terminal for processing is opened.
+Open the folder with the stamps_export data:
+```
+cd /media/user/external_harddrive_/proj_folder/flight_direction/data/INSAR_masterdate_folder/
+```
+Then do the first processing step using this command:
+```
+mt_prep_snap MASTERDATE Full_path_to/INSAR_masterdate_folder/ Da Patch_azi Patch_range Patch_merge_x Patch_merge_y
+```
+for example:
+```
+mt_prep_snap 20160728 media/Gijs/Samsung_t5/Thesis/Ascending/90_222/2016/INSAR_20160728/ 0.4 3 2 50 200
+```
+This will start mt_prep_Snap with an amplitude dispersion treshold of 0.4 (between 0.4 and 0.42 is normal with 0.4 having less PS), 6 patches of 3 in azimuth and 2 in range and the patches overlap with 50 and 200m each.
+If processing in 1 patch is possible without memory issues this is recommended.
+
+Carefully read to the log of mt_prep_snap upon finishing and look whether the mean_amplitude is never 0 and there are not to much ps points without amplitude, this will throw errors later in stamps processing.
+When done reading dont close the terminal but type:
+```
 matlab
+```
+This will open a matlab window in the right directory to do the further StaMPS processing.
 
-the rest of the processing will be done in the just opened up matlab interface
+# Matlab-Processing
+
 
 all the Matlab steps can be done using the command stamps(1,8) but step for step processing may be prefferedusing stamps (1,1) for step 1 and stamps(3,4) for step 3 and 4 for example.
 all parameter values and the defaults can be see using getparms and changed using ................
