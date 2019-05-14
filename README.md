@@ -24,8 +24,6 @@ The processing Chain is dependant on
 - QGIS or ArcGIS
 
 ### Installing
-
-
 Linux is required for all processing after Downloading the Data and preprocessing using Snap and Snap2StamPS, compiling with cygwin on windows has not been succesfull for almost all users.
 for this project you can use a Debian linux distribution like Ubuntu 14.04
 
@@ -292,13 +290,61 @@ matlab
 This will open a matlab window in the right directory to do the further StaMPS processing.
 
 # Matlab-Processing
+In the opened matlab window all further processing will be done, by simply typing``` stamps(1,8)```all steps of Stamps will be executed.
+Processing with all steps seperate may be better for parameterization though, in order to run 1 step or a certain ammount of steps type:
+```
+stamps(begin_step,end_step)
+```
+for step 2:
+```
+stamps(2,2)
+```
+for step 3 and 4:
+```
+stamps(3,4)
+```
 
+Except for running the program with default parameters we would like to be able to change parameter values.
+To get all parameters and their values and then change them:
+```
+getparm
+setparm('parameter_name', value)
+```
+another usefull command is the information about interferograms and their temporal and baseline decorrelation
+```
+ps_info
+```
 
-all the Matlab steps can be done using the command stamps(1,8) but step for step processing may be prefferedusing stamps (1,1) for step 1 and stamps(3,4) for step 3 and 4 for example.
-all parameter values and the defaults can be see using getparms and changed using ................
-for aparameter list for this project email (g.j.vanleeuwens@gmail.com), for exploration look at (blog part 2 gitlab)
+- Step 1 load data
 
-all processing except for step 6-8 will be done by the patches, then at step 6 all patches will be combined.
+Converts the data into the formats required for PS processing and stores them in matlab workspaces.
+This step has no important parameters to change
+
+- Step 2 Estimate phase noise
+
+Step 2 estimates the phase noise for every pixel in the interferograms via an iterative step.
+There are alot of parameters controlling this step but barely any documentation on how to use them correctly for noise reduction. Some sources note that changing the ```filter_grid_size , clap_alpha and gamma_max_iterations``` could make the filtering stronger and reduce the overall noise.
+
+- step 3 PS selection
+
+By buffering and using threshold values this step decides on letting PS with random phase fall out of the total PS.
+By lowering the possible density of these random phase pixels using the ``` density/percent_rand``` parameter less noisy pixels will be kept.
+
+- step 4 PS Weeding
+
+at step 4 other bad PS pixels(too much noise or ground contributions) will be weeded from the PS pixels left from step 3. The parameters are easy to grasp so some adjustements can be easily made here.
+Reducing the weed_Standard_dev can easily remove the worse pixels from the group, any value between 0.65 and 1 is quite realistic.
+
+- step 5 merge and resampling
+
+If you have chosen to process in multiple patches from mt_prep_snap the patches will be merged here for step 6. It is also an option to resample the PS points to a lower resolution for noise reduction. Keep in mind that making ```merge_resample_size ``` higher can lead to undersampling of the deformation that is being detected so should be used carefully.
+
+- step 6 SNAPHU phase unwrapping
+
+Phase unwrapping creates the displacement values for the final results based on a stochastic process over all interferograms.
+Step 6 is really important and prone to error so reprocessing this step multiple times is necessary to get good results.
+The important parameters for step 6 are
+
 keep in mind that SNAPHU Phase unwrapping has a stochastic factor because it has random starting points, run this process multiple times for good results!
 
 
