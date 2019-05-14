@@ -23,11 +23,11 @@ The processing Chain is dependant on
 - MatLab (list toolboxes)
 - QGIS or ArcGIS
 
-### Installing
+## Installing
 Linux is required for all processing after Downloading the Data and preprocessing using Snap and Snap2StamPS, compiling with cygwin on windows has not been succesfull for almost all users.
 for this project you can use a Debian linux distribution like Ubuntu 14.04
 
-# installing for preprocessing
+### installing for preprocessing
 downloading and preprocessing:
 - install Python 3.0 using a conda environment
 ```
@@ -42,7 +42,7 @@ conda create -n yourenvname python=2.7 pathlib
 - instal SNAP (S1 and S2 toolbox) for your operating system from: http://step.esa.int/main/download/
 - install QGis, ArcGIS or Gdal in python 
 
-# Installing for processing in stamps:
+### Installing for processing in stamps:
 
 - install debian based linux in a virtual machine or as a dual boot (check minimum system requirements)
 basic steps are:
@@ -102,7 +102,7 @@ Sudo apt-get install matlab-support
 
 in this chapter we will discuss where to download Sentinel-1 data for the PS-InSAR processing. You can use either alaska satellite facility or the copernicus hub as platform to download the data but this instruction will be for the Alaska sattelite facility. for the copernicus hub you could use: https://forum.step.esa.int/t/python-data-downloader/14308
 
-# Searching data
+### Searching data
 
 Surf to https://vertex.daac.asf.alaska.edu/#
 
@@ -122,7 +122,7 @@ Be sure to download ascending and descending data seperately since they can not 
 if you want to download certain tiles seperately you can search based on path and frame aswell
 - Use seasonal search to find data within a set ammount of years and months, almost all data used for the project is between first of june and last of october of 2016 and 2018. A full data list and downloader scripts can be requested at g.j.vanleeuwens@gmail.com.
 
-# downloading
+### downloading
 After searching data that meets the requirements add all the data files to the download que.
 In the download que window choose download python script and enter your earthdata login credentials.
 Move the download python script to the folder where you want the data to be downloaded to.
@@ -144,7 +144,7 @@ In chapter the preprocessing using snap2stamps and SNAP will be covered. The Pre
 Snap2stamps are python wrappers for using the S1tbx of SNAP for interferometric preprocessing.
 To be able to use the snap2stamps package a working python 2.7 installation is required: check chapter installation
 
-- setup
+### setup
 Before we can use snap2stamps the directory has to be set up.
 Snap2stamps expects the data to be sorted in 2 seperate folders: master and slaves. In the master directory the preprocessed master and original data for the master should be located. In the slaves folder all unprocessed and unzipped slave data files should be located
 
@@ -191,7 +191,7 @@ The / after the paths or not
 The IW1= parameter needs for example IW2 - not 2!
 The complete path to the master.dim!
 
-- Step 4 - execution Snap2stamps:
+### execution Snap2stamps (step 4):
 Move the config file(can have every name you want) to the Snap2stamps/bin folder and open a terminal in this location(tympe cmd in search bar).
 
 In terminal type:
@@ -233,7 +233,7 @@ Or oversampling the signal by changing the coregistration parameters like this:
 
 StaMPS is a software package developed for linux bash and the linux matlab environment, in order to complete all the steps we need todo both the preperation step in the terminal as the processing steps in matlab.
 
-# pre-matlab processing
+### pre-matlab processing
 To start matlab processing we first have to setup an environment using the config.bash file that is delivered with the STaMPS installation.
 Navigate to your StaMPS folder and open the config.bash file in a text editor, file is located here:
 ```
@@ -289,7 +289,7 @@ matlab
 ```
 This will open a matlab window in the right directory to do the further StaMPS processing.
 
-# Matlab-Processing
+### Matlab-Processing
 In the opened matlab window all further processing will be done, by simply typing``` stamps(1,8)```all steps of Stamps will be executed.
 Processing with all steps seperate may be better for parameterization though, in order to run 1 step or a certain ammount of steps type:
 ```
@@ -343,13 +343,32 @@ If you have chosen to process in multiple patches from mt_prep_snap the patches 
 
 Phase unwrapping creates the displacement values for the final results based on a stochastic process over all interferograms.
 Step 6 is really important and prone to error so reprocessing this step multiple times is necessary to get good results.
-The important parameters for step 6 are
+The important parameters for step 6 are:
+``` unwrap_prefilter_flag``` The recommendation for this parameter is to keep it on 'y' because this will extract the errors calculated at step 7 and adds them in after unwrapping to improve the accuracy of the unwrapping. If you want to process 1 run without the pre_filter you can use ```scla_reset``` to clear the values from step 7.
+```unwrap_grid_size``` This parameter determines to what grid the PS pixels will be resampled for the unwrapping. Higher values will reduce noise from unwrapping but also can undersample your deformation, use this parameter for noise reduction but with caution.
+```unwrap_gold_n_win``` , ```unwrap_time_win ``` and ``` unwrap_gold_alpha``` these parameters control the Goldstein filter that is used on the grid before unwrapping takes place and reduces noise on the fringes. Highering the alpha value will generally set the filter to filter more and can therefore undersample your deformation, the window and time size of the filter should be played with to obtain a good result. ```unwrap_gold_n_win``` can cause problems when not enough pixels fall inside of the window, it has to be highered than.
+```drop_ifg_index``` This parameter makes sure the interferograms listed (by number as shown in ```ps_info```) are not used in the processing, if a interferogram is added the processing has to be rerun from step 3. Use this parameter if after multiple times this interferogram can still not be reliabely unwrapped.
 
-keep in mind that SNAPHU Phase unwrapping has a stochastic factor because it has random starting points, run this process multiple times for good results!
+- step 7
+
+- step 8
+
+### how to process in StaMPS
+
+run steps 1-6
+check ps_plot ('u')
+add bad ifgs to scla_drop_index
+run step 7
+check ps_plot('u-dm') is generally smoother
+rerun step 6
+check ps_plot(ú')
 
 
 
-## post-StaMPS processing
+
+
+
+# post-StaMPS processing
 
 visualizing the StamPS output can be done using multiple ways: you can use the ps_plot functions, the google earth kml file generation, a wonderful QGIS plugin or as we did in this project the StamPS-Visualizer by:.....
 
@@ -357,7 +376,7 @@ to create the csv out putfor this plugin based on R and Rstudio follow this proc
 
 code for vialize creation.
 
-## visualization
+# visualization
 
 
 ## Deployment
