@@ -1,10 +1,8 @@
-# ps_insar_snap-stamps
-documentation on the publication of post-fire seasonal permafrost degradation in relation with InSAR subsidence.
-InSAR Subsidence for post-fire seasonal Permafrost degredation.
-- based on the 2017 Greenland fire
+# SNAP-StaMPS-Visualizer workflow documentation
+Documentation on the publication of post-fire seasonal permafrost degradation in relation with InSAR subsidence.
+InSAR Subsidence for post-fire seasonal Permafrost degredation based on the 2017 Greenland fire.
 
 This Project is part of the Course AB_..... of the Free University Amsterdam departement Earth and Climate. Based on Procesing of Sentinel-1 data of 2016 and 2018 the project tries to describe seasonal change in permafrost degradation caused by wildfire induced dynamics. The processing is done using ESA's SNAP [Reference] and the software StamPS by the Universitoy of Leeds [reference]. 
-
 
 
 ## Getting Started:
@@ -27,30 +25,30 @@ The processing Chain is dependant on
 Linux is required for all processing after Downloading the Data and preprocessing using Snap and Snap2StamPS, compiling with cygwin on windows has not been succesfull for almost all users.
 for this project you can use a Debian linux distribution like Ubuntu 14.04
 
-### installing for preprocessing
-downloading and preprocessing:
-- install Python 3.0 using a conda environment
+### Installing for preprocessing
+Downloading and preprocessing:
+- install Python 3.0 using a conda environment (reccomended packages for post-processing: pandas, numpy, Gdal, ogr, shapely)
 ```
 conda create -n yourenvname python=3.0 
 ```
-- install python 2.7 using a conda environment and necessary packages (check manual for full list:https://github.com/mdelgadoblasco/snap2stamps/)
+- Install python 2.7 using a conda environment and necessary packages (check manual for full list:https://github.com/mdelgadoblasco/snap2stamps/)
 ```
 conda create -n yourenvname python=2.7 pathlib 
 ```
 
-- download the Snap2Stamps GIT from: https://github.com/mdelgadoblasco/snap2stamps/
-- instal SNAP (S1 and S2 toolbox) for your operating system from: http://step.esa.int/main/download/
-- install QGis, ArcGIS or Gdal in python 
+- Download the Snap2Stamps GIT from: https://github.com/mdelgadoblasco/snap2stamps/
+- Instal SNAP (S1 and S2 toolbox) for your operating system from: http://step.esa.int/main/download/
+- Install QGis, ArcGIS or Gdal in python 
 
 ### Installing for processing in stamps:
 
-- install debian based linux in a virtual machine or as a dual boot (check minimum system requirements)
+- Install debian based linux in a virtual machine or as a dual boot (check minimum system requirements)
 basic steps are:
-1. create a bootable nusb device with your linux_distro.iso file and a program like: rufus
-2. boot pc from usb by changing boot settings
-3. install linux on pc when booting from usb
-4. change boot settings back to base operating system
-5. system will now boot from the installed linux_distro
+1. Create a bootable usb device with your linux_distro.iso file and a program like: rufus
+2. Boot pc from usb by changing boot settings
+3. Install linux on pc when booting from usb
+4. Change boot settings back to base operating system
+5. System will now boot from the installed linux_distro
 
 All commands can be run in the basic terminal directory except for the make and make install.
 - install standard libraries
@@ -62,62 +60,62 @@ Sudo apt-get install gawk
 Sudo apt-get install tcsh
 ```
 
-- install stamps on linux
-download files from the git: https://github.com/dbekaert/StaMPS
+- Install stamps on linux
+Download files from the git: https://github.com/dbekaert/StaMPS
 Extract zip
 ```
 Cd stamps4.1b/src
 Make
 Make install
 ```
-- install SnaPHU
+- Install SnaPHU
 ```
 Sudo apt-get install snaphu
 ```
-- install Triangle
+- Install Triangle
 ```
 sudo apt-get install Triangle
 ```
-- clone the train git package (may need extra package to use git clone command)
-train will be used in step 8 of stamps processing and has dependencies: BEAM for re-projection of satellite data; NCL when using weather model data from the US; GMT for auxiliary tropospheric correction methods
+- Clone the TRAIN git package (may need extra package to use git clone command)
+train will be used after step 8 of stamps processing and has dependencies(not always needed): BEAM for re-projection of satellite data; NCL when using weather model data from the US; GMT for auxiliary tropospheric correction methods
 ```
 git clone https://github.com/dbekaert/TRAIN.git
 ```
-- install Matlab
+- Install Matlab
 This step requires a full matlab license
 Download unix installer for Matlab from: https://nl.mathworks.com/downloads/
 note: if the installer asks if you want to change path names to keep libraries from conflicting choose yes!
 
-- install SNAP (not necessary if preprocessing is not done on the linux machine)
+- Install SNAP (not necessary if preprocessing is not done on the linux machine)
 Download Unix installer from: http://step.esa.int/main/download/
 
 - Install more dependencies
 ```
 Sudo apt-get install matlab-support
 ```
-- install either ArcGIS, QGIS or Gdal for post processing and merging of DEM tiles
+- Install either ArcGIS, QGIS or Gdal for post processing and merging of DEM tiles
 
 
 ## Downloading data
 
-in this chapter we will discuss where to download Sentinel-1 data for the PS-InSAR processing. You can use either alaska satellite facility or the copernicus hub as platform to download the data but this instruction will be for the Alaska sattelite facility. for the copernicus hub you could use: https://forum.step.esa.int/t/python-data-downloader/14308
+In this chapter we will discuss where to download Sentinel-1 data for the PS-InSAR processing. You can use either alaska satellite facility or the copernicus hub as platform to download the data but this instruction will be for the Alaska sattelite facility. for the copernicus hub you could use: https://forum.step.esa.int/t/python-data-downloader/14308
 
 ### Searching data
 
 Surf to https://vertex.daac.asf.alaska.edu/#
 
-- select the AOI (are of interest)
+- Select the AOI (are of interest)
 AOI for project is:
 LONMIN=-51.84
 LATMIN=67.78
 LONMAX=-51.35
 LATMAX=67.91
-- select satellites
+- Select satellites
 The Sentinel mission consists of 2 satellites: Sentinel-1A, launched on 3 April 2014, and Sentinel-1B launched on 25 April 2016.
 The 2 satellites combined will provide 1 image every 6 days since they both have a 12 day repeat cycle. The imagery is available in ascending and descending orbit and should both be downloaded (but kept seperate) to compute the vertical displacement.
-- select data product.
+- Select data product.
 For this project only IW-SLC data will be used, information about IW-SLC can be found here: https://sentinel.esa.int/web/sentinel/technical-guides/sentinel-1-sar/products-algorithms/level-1/single-look-complex/interferometric-wide-swath
-- select flight direction and path/frame
+- Select flight direction and path/frame
 Be sure to download ascending and descending data seperately since they can not be combined during the interferometry phase.
 if you want to download certain tiles seperately you can search based on path and frame aswell
 - Use seasonal search to find data within a set ammount of years and months, almost all data used for the project is between first of june and last of october of 2016 and 2018. A full data list and downloader scripts can be requested at g.j.vanleeuwens@gmail.com.
@@ -140,24 +138,24 @@ All Data will now be downloaded and if already downloaded controlled for corrupt
 
 ## SNAP Preprocessing
 
-In chapter the preprocessing using snap2stamps and SNAP will be covered. The Preprocessing can be done on both Windows and linux, this documentation is for use on a Windows machine.
+In this chapter the preprocessing using snap2stamps and SNAP will be covered. The Preprocessing can be done on both Windows and linux, this documentation is for use on a Windows machine.
 Snap2stamps are python wrappers for using the S1tbx of SNAP for interferometric preprocessing.
 To be able to use the snap2stamps package a working python 2.7 installation is required: check chapter installation
 
-### setup
+### Setup
 Before we can use snap2stamps the directory has to be set up.
 Snap2stamps expects the data to be sorted in 2 seperate folders: master and slaves. In the master directory the preprocessed master and original data for the master should be located. In the slaves folder all unprocessed and unzipped slave data files should be located
 
-- Step 1 - master selection:
+- Step 1 - Master selection:
 Open all images in SNAP desktop
 Navigate to radar - interferometric - INSAR stack overview.
 Open all data in the window and click overview this will tell you which image is ideal to use as a master based on the temporal and baseline characteristics of the SLC products.
 
-- Step 2 - master preprocessing:
+- Step 2 - Master preprocessing:
 Use radar - interferometric - tops - tops split on the master to select the necessary subswath and bursts.
 Use radar - apply orbit file on the output of the last step (be sure to use precise orbits).
 
-- Step 3 - setup project.conf file:
+- Step 3 - Setup project.conf file:
 Open the config file located in the snap2stamps folder with a text editor.
 Change all parameters accordingly to below example.
 ```
@@ -191,7 +189,8 @@ The / after the paths or not
 The IW1= parameter needs for example IW2 - not 2!
 The complete path to the master.dim!
 
-### execution Snap2stamps (step 4):
+- Step 4 - Execution Snap2StaMPS scripts:
+
 Move the config file(can have every name you want) to the Snap2stamps/bin folder and open a terminal in this location(tympe cmd in search bar).
 
 In terminal type:
@@ -261,12 +260,12 @@ export LC_TIME="en_US.UTF-8"
 ...
 export PATH=${PATH}:$STAMPS/bin:$MATLABPATH:$SNAP2STAMPS/bin
 ```
-and then upon opening the terminal add all paths to your ENV by sourcing the config file:
+And then upon opening the terminal add all paths to your ENV by sourcing the config file:
 ```
 source /home/username/your_proj_folder/StaMPS-4.1-beta/StaMPS_CONFIG.bash
 ```
 
-if you intend to use the TRAIN toolbox for atmoshperic correction aswelll you will have to source that config file aswell.
+If you intend to use the TRAIN toolbox for atmoshperic correction aswelll you will have to source that config file aswell.
 Navigate to your TRAIN folder, open the file in a text editor.
 ```
 /home/username/TRAIN/config...
@@ -280,7 +279,7 @@ source
 ```
 
 
-upon having setup the environment we can start processing, remember to source the config.bash file everytime a new terminal for processing is opened.
+Upon having setup the environment we can start processing, remember to source the config.bash file everytime a new terminal for processing is opened.
 Open the folder with the stamps_export data:
 ```
 cd /media/user/external_harddrive_/proj_folder/flight_direction/data/INSAR_masterdate_folder/
@@ -324,7 +323,7 @@ To get all parameters and their values and then change them:
 getparm
 setparm('parameter_name', value)
 ```
-another usefull command is the information about interferograms and their temporal and baseline decorrelation
+Another usefull command is the information about interferograms and their temporal and baseline decorrelation
 ```
 ps_info
 ```
@@ -339,21 +338,21 @@ This step has no important parameters to change
 Step 2 estimates the phase noise for every pixel in the interferograms via an iterative step.
 There are alot of parameters controlling this step but barely any documentation on how to use them correctly for noise reduction. Some sources note that changing the ```filter_grid_size , clap_alpha and gamma_max_iterations``` could make the filtering stronger and reduce the overall noise.
 
-- step 3 PS selection
+- Step 3 PS selection
 
 By buffering and using threshold values this step decides on letting PS with random phase fall out of the total PS.
 By lowering the possible density of these random phase pixels using the ``` density/percent_rand``` parameter less noisy pixels will be kept.
 
-- step 4 PS Weeding
+- Step 4 PS Weeding
 
 at step 4 other bad PS pixels(too much noise or ground contributions) will be weeded from the PS pixels left from step 3. The parameters are easy to grasp so some adjustements can be easily made here.
 Reducing the weed_Standard_dev can easily remove the worse pixels from the group, any value between 0.65 and 1 is quite realistic.
 
-- step 5 merge and resampling
+- Step 5 merge and resampling
 
 If you have chosen to process in multiple patches from mt_prep_snap the patches will be merged here for step 6. It is also an option to resample the PS points to a lower resolution for noise reduction. Keep in mind that making ```merge_resample_size ``` higher can lead to undersampling of the deformation that is being detected so should be used carefully.
 
-- step 6 SNAPHU phase unwrapping
+- Step 6 SNAPHU phase unwrapping
 
 Phase unwrapping creates the displacement values for the final results based on a stochastic process over all interferograms.
 Step 6 is really important and prone to error so reprocessing this step multiple times is necessary to get good results.
@@ -367,7 +366,7 @@ The important parameters for step 6 are:
 
 ```drop_ifg_index``` This parameter makes sure the interferograms listed (by number as shown in ```ps_info```) are not used in the processing, if a interferogram is added the processing has to be rerun from step 3. Use this parameter if after multiple times this interferogram can still not be reliabely unwrapped.
 
-- step 7 Estimate spatially-correlated look angle error
+- Step 7 Estimate spatially-correlated look angle error
 
 Spatially-uncorrelated look angle (SULA) error was calculated in Step 3 and removed in Step 5.  InStep 7,  spatially-correlated look angle (SCLA) error is calculated which is due almost exclusivelyto  spatially-correlated  DEM  error  (this  includes  error  in  the  DEM  itself,  and  incorrect  mapping  ofthe DEM into radar co-ordinates).   Master atmosphere and orbit error (AOE) phase is estimated simultaneously.
 
@@ -375,8 +374,7 @@ The errors calculated in step 7 are importtant to improve the unwrapping results
 
 The most important parameters for step 7 are ```scla_drop_index``` and ```scla_deramp```. If a result is not reliabely unwrapped and you do not want to impact it the result of step 7 you can add the interferogram (number in ps_info) to the ```scla_drop_index``` and step 7 will skip this interferogram when calculating. Using ```scla_deramp``` may improve your results when high phase ramps are distorting your results, by setting parameter to 'y' it will calculate an extra error to be removed.
 
-
-- step 8 Atmospheric calculation using StaMPS
+- Step 8 Atmospheric calculation using StaMPS
 
 step 8 filters the results specifically for atmospheric disturbance, play with the parameters ```scn_wavelength``` and ```scn_time_win``` to see what works for your AOI.
 
@@ -452,18 +450,15 @@ ps_plot('v-dao' , 'a_linear' , 'ts')
 
 # post-StaMPS processing
 
-visualizing the StamPS output can be done using multiple ways: you can use the ps_plot functions, the google earth kml file generation, a wonderful QGIS plugin or as we did in this project the StamPS-Visualizer 
+To convert the corrected LOS displacements from stamps in to combined asc and des vertical displacement I have created a few python scripts to ease this process.
 
-code for vialize creation.
+... complete python wrappers and implement here
 
 # visualization
 
+visualizing the StamPS output can be done using multiple ways: you can use the ps_plot functions, the google earth kml file generation, a wonderful QGIS plugin or as we did in this project the StamPS-Visualizer 
 
-
-
-
-
-
+... implement install and use od stamps-visualizer
 
 ## Contributing
 
