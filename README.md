@@ -266,6 +266,20 @@ and then upon opening the terminal add all paths to your ENV by sourcing the con
 source /home/username/your_proj_folder/StaMPS-4.1-beta/StaMPS_CONFIG.bash
 ```
 
+if you intend to use the TRAIN toolbox for atmoshperic correction aswelll you will have to source that config file aswell.
+Navigate to your TRAIN folder, open the file in a text editor.
+```
+/home/username/TRAIN/config...
+```
+Edit the file like this:
+```
+```
+And source the file in the same terminal as StAMPS
+```
+source 
+```
+
+
 upon having setup the environment we can start processing, remember to source the config.bash file everytime a new terminal for processing is opened.
 Open the folder with the stamps_export data:
 ```
@@ -428,38 +442,36 @@ export_res = table(export_res);
 writetable(export_res,'stamps_tsexport.csv')
 ``` 
 
+if you want to use TRAIN check the train manual: http://davidbekaert.com/download/TRAIN_manual.pdf
+but using linear correction try this:
+``` 
+aps_linear
+ps_plot('v-dao' , 'a_linear' , 'ts')
+``` 
+
+
 # post-StaMPS processing
 
-visualizing the StamPS output can be done using multiple ways: you can use the ps_plot functions, the google earth kml file generation, a wonderful QGIS plugin or as we did in this project the StamPS-Visualizer by:.....
-
-to create the csv out putfor this plugin based on R and Rstudio follow this process:
+visualizing the StamPS output can be done using multiple ways: you can use the ps_plot functions, the google earth kml file generation, a wonderful QGIS plugin or as we did in this project the StamPS-Visualizer 
 
 code for vialize creation.
 
 # visualization
 
 
-## Deployment
 
-Add additional notes about how to deploy this on a live system
 
-## Built With
 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+
+
 
 ## Contributing
 
 Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
 
-## Versioning
-
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
-
 ## Authors
 
-* **Billie Thompson** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+* **Gijs van Leeuwen** - *Initial work* - [personal github]
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
 
