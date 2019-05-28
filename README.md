@@ -462,7 +462,7 @@ visualizing the StamPS output can be done using multiple ways: you can use the p
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
+Please read [CONTRIBUTING.md](https://gist.github.com/you/project/contributing.md) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ## Authors
 
@@ -472,12 +472,11 @@ See also the list of [contributors](https://github.com/your/project/contributors
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
 
 ## Acknowledgments
 
-* Hat tip to anyone whose code was used
-* Inspiration
-* etc
+* 
+* 
+* 
 
 
