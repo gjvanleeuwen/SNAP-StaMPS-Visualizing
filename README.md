@@ -447,8 +447,11 @@ ps_plot('v-dao' , 'a_linear' , 'ts')
 
 # post-StaMPS processing
 
-To convert the corrected LOS displacements from stamps in to combined asc and des vertical displacement I have created a few python scripts to ease this process.
-The scripts can be downloaded from this git and can be adjusted to your folder system.
+To convert the corrected LOS displacement from StaMPS into combined ascending and descending vertical displacement I have created a few python scripts to ease this process.
+The scripts can be downloaded from this git and meed to be adjusted to your folder system.
+
+first script to run is vertical_displacement_calculator.py
+second script to run is asc_desc_combiner.py
 
 # visualization
 
