@@ -1,9 +1,8 @@
 # SNAP-StaMPS-Visualizer workflow documentation
-Documentation on the publication of post-fire seasonal permafrost degradation in relation with InSAR subsidence.
+Documentation on the bachelor thesis: AN ASSESMENT OF SENTINEL-1 RADAR IMAGERY TIME-SERIES ANAYLIS FOR MONITORING SEASONAL SURFACE SUBSIDENCE DUE TO PERMAFROST DEGRADATION AFTER A TUNDRA FIRE.
 InSAR Subsidence for post-fire seasonal Permafrost degredation based on the 2017 Greenland fire.
 
-This Project is part of the Course AB_..... of the Free University Amsterdam departement Earth and Climate. Based on Procesing of Sentinel-1 data of 2016 and 2018 the project tries to describe seasonal change in permafrost degradation caused by wildfire induced dynamics. The processing is done using ESA's SNAP [Reference] and the software StamPS by the Universitoy of Leeds [reference]. 
-
+This Project is part of the Course AB_1096 of the Free University Amsterdam departement Earth and Climate. Based on Procesing of Sentinel-1 data of 2016 and 2018 the project tries to describe seasonal change in permafrost degradation caused by wildfire induced dynamics. The processing is done using ESA's SNAP [Veci etal., 2014] and the software StaMPS by the Universitoy of Leeds [Hooper et al., 2007]. 
 
 ## Getting Started:
 
@@ -447,36 +446,23 @@ aps_linear
 ps_plot('v-dao' , 'a_linear' , 'ts')
 ``` 
 
-
 # post-StaMPS processing
 
 To convert the corrected LOS displacements from stamps in to combined asc and des vertical displacement I have created a few python scripts to ease this process.
-
-... complete python wrappers and implement here
+The scripts can be downloaded from this git and can be adjusted to your folder system.
 
 # visualization
 
-visualizing the StamPS output can be done using multiple ways: you can use the ps_plot functions, the google earth kml file generation, a wonderful QGIS plugin or as we did in this project the StamPS-Visualizer 
-
-... implement install and use od stamps-visualizer
-
-## Contributing
-
-Please read [CONTRIBUTING.md](https://gist.github.com/you/project/contributing.md) for details on our code of conduct, and the process for submitting pull requests to us.
+Visualization of the data in this project is done using QGIS and Python. All scripts used can be found in this Git and shapefiles used can be requested by contacting me directly. Scripts will have to be adjusted to personal file structure and projections to be usable.
 
 ## Authors
 
-* **Gijs van Leeuwen** - *Initial work* - [personal github]
-
-See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
-
-## License
+* **Gijs van Leeuwen** - *Processer and main author* - [https://github.com/gjvanleeuwen/]
 
 
 ## Acknowledgments
-
-* 
-* 
-* 
+* **dr. Sander Veraverbeke** - *supervisor environmental processing and writing* [https://sites.google.com/view/sanderveraverbeke/sander-veraverbeke?authuser=0]
+* **dr. Kanayim Teshebaeva** - *supervisor for InSAR processing* - 
+* **STEP Forum contributors** - *software help and understanding*
 
 
