@@ -1,0 +1,104 @@
+List of all Sentinel-1 aquisitions used for this project. 
+All images have been downloaded from ALaska Satellite Facility (ASF)
+
+ps_info asc 90_222 2016
+  1  02-Jun-2016     2 m   28.345 deg
+  2  14-Jun-2016   -61 m   25.187 deg
+  3  08-Jul-2016   -48 m   21.503 deg
+  4  20-Jul-2016    43 m   22.521 deg
+  5  01-Aug-2016     0 m   31.490 deg
+  6  13-Aug-2016   -58 m   18.986 deg
+  7  25-Aug-2016  -121 m   16.251 deg
+  8  06-Sep-2016   -40 m   25.291 deg
+  9  18-Sep-2016     1 m   25.429 deg
+ 10  30-Sep-2016    49 m   26.906 deg
+
+ps_inf0 desc 127_366
+  1  05-Jun-2016    72 m   25.701 deg
+  2  29-Jun-2016   -31 m   23.624 deg
+  3  11-Jul-2016   -66 m   22.957 deg
+  4  23-Jul-2016     0 m   32.738 deg
+  5  04-Aug-2016    97 m   18.520 deg
+  6  16-Aug-2016    16 m   20.165 deg
+  7  28-Aug-2016   -63 m   24.510 deg
+  8  09-Sep-2016   -89 m   21.262 deg
+  9  21-Sep-2016   -87 m   26.220 deg
+ 10  03-Oct-2016    37 m   29.172 deg
+
+ps_info desc 25_365
+  1  29-May-2016   -17 m   27.382 deg
+  2  10-Jun-2016   -19 m   24.931 deg
+  3  04-Jul-2016   110 m   18.364 deg
+  4  16-Jul-2016     0 m   34.056 deg
+  5  28-Jul-2016   -72 m   17.747 deg
+  6  09-Aug-2016   -33 m   17.859 deg
+  7  21-Aug-2016    38 m   21.492 deg
+  8  02-Sep-2016    45 m   24.269 deg
+  9  14-Sep-2016    10 m   22.290 deg
+ 10  26-Sep-2016     2 m   26.577 deg
+
+ps_info asc 90_222 2018
+  1  10-Jun-2018     2 m   53.448 deg
+  2  16-Jun-2018    11 m   56.366 deg
+  3  22-Jun-2018    -5 m   43.653 deg
+  4  28-Jun-2018    92 m   35.126 deg
+  5  04-Jul-2018   -61 m   47.284 deg
+  6  10-Jul-2018    61 m   34.800 deg
+  7  16-Jul-2018     7 m   34.333 deg
+  8  22-Jul-2018   -41 m   28.227 deg
+  9  28-Jul-2018    41 m   29.210 deg
+ 10  03-Aug-2018     0 m   32.084 deg
+ 11  09-Aug-2018   113 m   29.474 deg
+ 12  15-Aug-2018   -40 m   31.964 deg
+ 13  21-Aug-2018   -64 m   23.099 deg
+ 14  27-Aug-2018     4 m   23.956 deg
+ 15  02-Sep-2018   -53 m   24.550 deg
+ 16  08-Sep-2018    47 m   26.738 deg
+ 17  14-Sep-2018   -24 m   22.830 deg
+ 18  20-Sep-2018   -17 m   25.933 deg
+ 19  26-Sep-2018    84 m   31.862 deg
+
+
+ps_info desc 127_366
+  1  01-Jun-2018   -63 m   45.044 deg
+  2  07-Jun-2018  -105 m   38.746 deg
+  3  13-Jun-2018    51 m   37.330 deg
+  4  19-Jun-2018   -68 m   36.163 deg
+  5  25-Jun-2018    18 m   30.355 deg
+  6  01-Jul-2018     1 m   29.207 deg
+  7  07-Jul-2018   -47 m   30.610 deg
+  8  13-Jul-2018    46 m   30.880 deg
+  9  19-Jul-2018   -53 m   26.729 deg
+ 10  25-Jul-2018     0 m   33.082 deg
+ 11  31-Jul-2018   -54 m   25.448 deg
+ 12  06-Aug-2018   -44 m   26.784 deg
+ 13  12-Aug-2018    29 m   23.093 deg
+ 14  18-Aug-2018   -94 m   31.028 deg
+ 15  24-Aug-2018    -9 m   24.373 deg
+ 16  30-Aug-2018    20 m   23.726 deg
+ 17  11-Sep-2018    11 m   35.571 deg
+ 18  17-Sep-2018   -65 m   29.212 deg
+ 19  23-Sep-2018    15 m   37.187 deg
+ 20  29-Sep-2018   -58 m   37.017 deg
+
+ps_info desc 25_366
+  1  31-May-2018    -6 m   58.920 deg
+  2  06-Jun-2018  -105 m   42.885 deg
+  3  12-Jun-2018    80 m   38.915 deg
+  4  18-Jun-2018   -39 m   39.528 deg
+  5  24-Jun-2018    38 m   33.778 deg
+  6  30-Jun-2018    85 m   30.895 deg
+  7  12-Jul-2018    55 m   39.294 deg
+  8  18-Jul-2018   -43 m   41.515 deg
+  9  24-Jul-2018    29 m   34.597 deg
+ 10  30-Jul-2018     0 m   34.274 deg
+ 11  11-Aug-2018    81 m   27.080 deg
+ 12  17-Aug-2018   -56 m   33.217 deg
+ 13  23-Aug-2018   -23 m   24.441 deg
+ 14  29-Aug-2018   -43 m   23.726 deg
+ 15  04-Sep-2018   -19 m   31.042 deg
+ 16  10-Sep-2018    67 m   29.877 deg
+ 17  16-Sep-2018   -37 m   24.535 deg
+ 18  22-Sep-2018    24 m   32.377 deg
+ 19  28-Sep-2018     9 m   35.173 deg
+ 20  04-Oct-2018   -57 m   36.979 deg
