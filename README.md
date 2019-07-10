@@ -1,6 +1,5 @@
 # SNAP-StaMPS workflow documentation
 Documentation on the bachelor thesis: AN ASSESMENT OF SENTINEL-1 RADAR IMAGERY TIME-SERIES ANAYLIS FOR MONITORING SEASONAL SURFACE SUBSIDENCE DUE TO PERMAFROST DEGRADATION AFTER A TUNDRA FIRE.
-InSAR Subsidence for post-fire seasonal Permafrost degredation based on the 2017 Greenland fire.
 
 This Project is part of the Course AB_1096 of the Free University Amsterdam departement Earth and Climate. Based on Procesing of Sentinel-1 data of 2016 and 2018 the project tries to describe seasonal change in permafrost degradation caused by wildfire induced dynamics. The processing is done using ESA's SNAP [Veci etal., 2014] and the software StaMPS by the Universitoy of Leeds [Hooper et al., 2007]. 
 
