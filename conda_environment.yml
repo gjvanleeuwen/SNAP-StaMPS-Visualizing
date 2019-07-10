@@ -1,0 +1,18 @@
+name: pycharm
+channels:
+- conda-forge
+- defaults
+dependencies:
+- python>=3.4,<3.5
+- gdal
+- matplotlib
+- numpy
+- pandas
+- pyproj
+- scipy
+- xarray
+- dask
+- cartopy
+- pyshp
+- joblib
+- seaborn
