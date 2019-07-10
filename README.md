@@ -1,4 +1,4 @@
-# SNAP-StaMPS-Visualizer workflow documentation
+# SNAP-StaMPS workflow documentation
 Documentation on the bachelor thesis: AN ASSESMENT OF SENTINEL-1 RADAR IMAGERY TIME-SERIES ANAYLIS FOR MONITORING SEASONAL SURFACE SUBSIDENCE DUE TO PERMAFROST DEGRADATION AFTER A TUNDRA FIRE.
 InSAR Subsidence for post-fire seasonal Permafrost degredation based on the 2017 Greenland fire.
 
